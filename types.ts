@@ -1,3 +1,13 @@
+export interface Product {
+  id: string;
+  category: Category;
+  name: string;
+  price: string;
+  isFeatured: boolean;
+  size: Size;
+  color: Color;
+  images: Image[];
+}
 export interface Billboard {
   id: string;
   label: string;
@@ -23,15 +33,4 @@ export interface Color {
 export interface Image {
   id: string;
   url: string;
-}
-
-export interface Product {
-  id: string;
-  category: Category;
-  name: string;
-  price: string;
-  isFeatured: boolean;
-  size: Size;
-  color: Color;
-  images: Image[];
 }
