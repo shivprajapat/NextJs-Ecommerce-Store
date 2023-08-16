@@ -8,6 +8,7 @@ import IconButton from "@/components/ui/icon-button";
 import Image from "next/image";
 import usePreviewModal from "@/hooks/use-preview-modal";
 import { useRouter } from "next/navigation";
+import useCart from "@/hooks/use-cart";
 
 interface ProductCardProps {
   data: Product;
@@ -16,6 +17,8 @@ const ProductCard: FC<ProductCardProps> = ({ data }) => {
   const previewModal = usePreviewModal();
   const router = useRouter();
 
+  const cart = useCart();
+
   const onPreview: MouseEventHandler<HTMLButtonElement> = (event) => {
     event.stopPropagation();
     previewModal.onOpen(data);
@@ -23,6 +26,7 @@ const ProductCard: FC<ProductCardProps> = ({ data }) => {
   const onAddToCart: MouseEventHandler<HTMLButtonElement> = (event) => {
     event.stopPropagation();
     console.log("cart added");
+    cart.addItem(data);
   };
   const productHandler = () => router.push(`/product/${data?.id}`);
   return (
