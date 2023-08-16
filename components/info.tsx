@@ -10,9 +10,9 @@ interface InfoProps {
 const Info: FC<InfoProps> = ({ data }) => {
   return (
     <div>
-      <h1 className="text-3xl font-bold text-gray-900">{data.name}</h1>
+      <h2 className="text-2xl font-semibold text-gray-900">{data.name}</h2>
       <div className="mt-3 flex items-end justify-between">
-        <p className="text-2xl text-gray-900">
+        <p className="text-lg text-gray-900 font-bold">
           <Currency value={data?.price} />
         </p>
       </div>

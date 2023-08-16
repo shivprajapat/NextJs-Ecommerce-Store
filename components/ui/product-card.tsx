@@ -6,21 +6,28 @@ import { Product } from "@/types";
 import Currency from "@/components/ui/currency";
 import IconButton from "@/components/ui/icon-button";
 import Image from "next/image";
-import Link from "next/link";
+import usePreviewModal from "@/hooks/use-preview-modal";
+import { useRouter } from "next/navigation";
 
 interface ProductCardProps {
   data: Product;
 }
 const ProductCard: FC<ProductCardProps> = ({ data }) => {
+  const previewModal = usePreviewModal();
+  const router = useRouter();
+
   const onPreview: MouseEventHandler<HTMLButtonElement> = (event) => {
     event.stopPropagation();
+    previewModal.onOpen(data);
   };
   const onAddToCart: MouseEventHandler<HTMLButtonElement> = (event) => {
     event.stopPropagation();
+    console.log("cart added");
   };
+  const productHandler = () => router.push(`/product/${data?.id}`);
   return (
-    <Link
-      href={`/product/${data?.id}`}
+    <div
+      onClick={productHandler}
       className="bg-white group cursor-pointer rounded-xl border p-3 space-y-4 flex flex-col justify-between"
     >
       <div>
@@ -30,6 +37,7 @@ const ProductCard: FC<ProductCardProps> = ({ data }) => {
             alt="product"
             fill
             className="object-cover rounded-md"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
           <div className="opacity-0 group-hover:opacity-100 transition absolute w-full px-6 bottom-5">
             <div className="flex gap-x-6 justify-center">
@@ -60,7 +68,7 @@ const ProductCard: FC<ProductCardProps> = ({ data }) => {
           <Currency value={data?.price} />
         </div>
       </div>
-    </Link>
+    </div>
   );
 };
 
